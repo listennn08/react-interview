@@ -13,7 +13,7 @@ npm run dev
 
 ## use skill
 ```
-Frontend: React.js,  Next.js
+Frontend: React.js,  Next.js, Redux
 UI Framework: MaterialUI
 Backend: Express, Apollo Server
 Lauguage: TypeScript
