@@ -1,0 +1,75 @@
+{
+  "items": [
+    {
+      "id": "3ca85c08-d9fb-4cdf-8984-9bc9ecf6bb7a",
+      "workId": "TW00001",
+      "name": "Manager 1",
+      "password": "123",
+      "manager": "",
+      "position": "manager"
+    }, {
+      "id": "b50f24e2-a461-4621-aaf4-0750c2b2d50c",
+      "workId": "TW00002",
+      "name": "Manager 2",
+      "password": "123",
+      "manager": "",
+      "position": "manager"
+    }, {
+      "id": "49b34a72-314d-4059-9118-c79201446dec",
+      "workId": "TW00003",
+      "name": "Staff 1",
+      "password": "123",
+      "manager": "3ca85c08-d9fb-4cdf-8984-9bc9ecf6bb7a",
+      "position": "staff"
+    }, {
+      "id": "8bdbdd9f-7966-4501-b2ff-a44b61cc4335",
+      "workId": "TW00004",
+      "name": "Staff 2",
+      "password": "123",
+      "manager": "b50f24e2-a461-4621-aaf4-0750c2b2d50c",
+      "position": "staff"
+    }, {
+      "id": "7fa2d33e-831c-4d2c-b6d7-b416c05c5c38",
+      "workId": "TW00005",
+      "name": "Influencer 1",
+      "password": "123",
+      "manager": "",
+      "position": "influencer"
+    }, {
+      "id": "bda42bbb-b934-4a13-86c2-f7d99a623edc",
+      "workId": "TW0006",
+      "name": "Influencer 2",
+      "password": "123",
+      "manager": "",
+      "position": "influencer"
+    }, {
+      "id": "1634f852-64d9-48e5-8191-51d04724e8ce",
+      "workId": "TW00011",
+      "name": "Influencer 3",
+      "password": "123",
+      "manager": "",
+      "position": "influencer"
+    }, {
+      "id": "21ff6969-fdb4-4e43-b2a8-92352028364c",
+      "workId": "TW0007",
+      "name": "Influencer 4",
+      "password": "123",
+      "manager": "",
+      "position": "influencer"
+    }, {
+      "id": "42b85d42-3a4a-41f1-82ce-4df71c3cb748",
+      "workId": "TW0008",
+      "name": "Influencer 5",
+      "password": "123",
+      "manager": "",
+      "position": "influencer"
+    }, {
+      "id": "5615b641-d2f9-4e6f-a610-d2aa61236c57",
+      "workId": "TW0009",
+      "name": "Influencer 6",
+      "password": "123",
+      "manager": "",
+      "position": "influencer"
+    }
+  ]
+}
