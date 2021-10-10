@@ -5,6 +5,13 @@
 預設登入 Manager 1，可透過右上角點擊切換登入者。
 
 ## usage
+
+```bash
+npm i
+npm run dev
+```
+
+## use skill
 ```
 Frontend: React.js,  Next.js
 UI Framework: MaterialUI
