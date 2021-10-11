@@ -31,9 +31,8 @@ export const queries = {
       const user = users.items.filter((user) => user.id === el.createdBy.id)[0]
 
       return el.createdBy.id === id || el.viewers.includes(id) || user?.manager === id
-    }).slice((page - 1) * limit, page * limit) as ITask[]
+    }).slice((page - 1) * limit, (page * limit) - 1) as ITask[]
 
-    console.log(tasksByUser.length, tasksByUser)
     return {
       status: true,
       msg: 'Get data success',
