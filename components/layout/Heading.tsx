@@ -7,7 +7,8 @@ import {
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import * as actions from 'store/actions'
 import { login } from 'pages/api/graphql'
-import type { IState } from 'types'
+
+import type { IState, IUser } from 'types'
 
 const BAppBar = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -32,10 +33,12 @@ const Heading = () => {
 
   const handleClose = async (value: string) => {
     if (!value) return
-    const resp = (await login(value, '123')).login
-    localStorage.setItem('token', resp.data!.token)
+    const resp = (await login(value, '123'))
+    if (!resp) return
+    const loginData  = resp.login as { data: { token: string, user: IUser }}
+    localStorage.setItem('token', loginData.data!.token)
     dispatch(actions.setIsLogin(true))
-    dispatch(actions.setUser(resp.data!.user))
+    dispatch(actions.setUser(loginData.data!.user))
     setAnchorEl(null)
   }
 

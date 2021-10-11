@@ -11,7 +11,6 @@ import { login } from 'pages/api/graphql'
 
 import type { IStatus, IUser } from 'types'
 
-
 const LoginContainer = styled(Container)(() => ({
   display: 'flex',
   flexDirection: 'column',
@@ -61,10 +60,26 @@ const Login = ({ actions }: { actions: typeof Actions }) => {
         setLoginStatus(true)
         actions.setIsLogin(true)
         actions.setUser(resp.data!.user)
+        actions.setAlertOpen(true)
+        actions.setAlertStatus({
+          type: 'success',
+          msg: resp.msg
+        })
       } else {
-        console.log('login fail')
+        actions.setAlertOpen(true)
+        actions.setAlertStatus({
+          type: 'error',
+          msg: 'Login failure.'
+        })
       }
     } catch (e) {
+
+      actions.setAlertOpen(true)
+      actions.setAlertStatus({
+        type: 'error',
+        msg: 'Something wrong.'
+      })
+
       console.error(e)
     }
   }
@@ -111,4 +126,7 @@ const mapDispatchToProps =  (dispatch: Dispatch) => ({
   actions: bindActionCreators(Actions, dispatch)
 })
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(
+  null,
+  mapDispatchToProps
+)(Login)

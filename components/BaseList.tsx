@@ -47,11 +47,13 @@ const chipText: { [key: string]: string } = {
   done: '完成',
 }
 
-export default function BaseList() {
+const BaseList = () => {
   const { tasks, filterStatus } = useSelector<IState, IState>((state) => state)
   const [displayTasks, setDisplayTasks] = useState<ITask[]>([])
 
   useEffect(() => {
+    console.log(tasks)
+    console.log(displayTasks)
     if (filterStatus) {
       setDisplayTasks(tasks.filter((task) => task.status === filterStatus))
     } else {
@@ -90,3 +92,5 @@ export default function BaseList() {
     </>
   )
 }
+
+export default BaseList

@@ -4,7 +4,11 @@ import gql from 'graphql-tag'
 
 import type { ICreateTask, ICreateUser, IUpdateTask } from 'types'
 
-const graphqlRequest = (node: DocumentNode, variables?: any) => Post({
+type TVariables = {
+  [key: string]: string | string[] | number | undefined
+}
+
+const graphqlRequest = (node: DocumentNode, variables?:TVariables) => Post({
   query: print(node),
   variables
 }).then(({ data }) => {

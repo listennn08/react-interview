@@ -11,7 +11,7 @@ type TProps = {
   disabled?: boolean
 }
 
-export default function UserSelector({ label, value, changeHandler, disabled = false }: TProps) {
+const BaseUserSelector = ({ label, value, changeHandler, disabled = false }: TProps) => {
   const users = useSelector<IState, IUser[]>((state) => state.selectUsers)
 
   return (
@@ -33,3 +33,5 @@ export default function UserSelector({ label, value, changeHandler, disabled = f
     </TextField>
   )
 }
+
+export default BaseUserSelector

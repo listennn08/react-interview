@@ -1,19 +1,17 @@
 import axios, { AxiosRequestConfig } from 'axios'
 
-// axios 請求攔截器
 axios.interceptors.request.use(
   (config) => {
     config.headers!.Authorization = localStorage.getItem('token')!
     return config
   },
   (err) => Promise.reject(err),
-);
+)
 
-// axios 回傳攔截器
 axios.interceptors.response.use(
   async (response) =>  response,
   (err) => err,
-);
+)
 
 type Params = {
   query: string
@@ -58,16 +56,9 @@ function Request({
           .catch((error) => reject(error))
       default:
     }
-  });
+  })
 }
-
-// 建立 axios 實體給不同 baseURL 的 API 使用
-export const AuthCore = axios.create({
-  baseURL: process.env.VUE_APP_DASHBOARD_URL,
-  withCredentials: false,
-});
-
 
 export const Post = (params: any, config?: AxiosRequestConfig) => Request({ 
   url: '/graphql', params, config, method: 'post',
-});
+})

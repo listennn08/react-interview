@@ -1,17 +1,24 @@
 import { useRouter } from 'next/router'
 import { ChangeEvent, useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux' 
+import { connect } from 'react-redux'
+import { bindActionCreators, Dispatch } from 'redux'
 import {
   TextField, Button, Typography, MenuItem,
   Select, styled, FormControl, InputLabel,
   FormGroup,
 } from '@material-ui/core'
-import * as actions from 'store/actions'
+import * as Actions from 'store/actions'
 import UserSelector from 'components/BaseUserSelector'
 import BaseAlert from 'components/BaseAlert'
 import { getSpecificTask, updateTask } from 'pages/api/graphql'
 
-import type { IState, ITask } from 'types'
+import type { IState, ITask, IUser } from 'types'
+
+type TProps = {
+  currentUser: IUser
+  users: IUser[]
+  actions: typeof Actions
+}
 
 const Form = styled('form')(({ theme }) => ({
   '& .MuiTextField-root': {
@@ -30,12 +37,9 @@ const SelectFormControl = styled(FormControl)(({ theme }) => ({
   width: '30%',
 }))
 
-export default function Task() {
+const Task = ({ currentUser, users, actions }: TProps) => {
   const router = useRouter()
   const { id } = router.query as { id: string }
-
-  const { currentUser, users } = useSelector<IState, IState>((state) => state)
-  const dispatch = useDispatch()
 
   const [edit, setEdit] = useState(false)
   const [task, setTask] = useState<ITask>({
@@ -115,18 +119,19 @@ export default function Task() {
       })
 
       if (resp.updateTask.status) {
-        dispatch(actions.setAlertOpen(true))
-        dispatch(actions.setAlertStatus({
+        actions.setAlertOpen(true)
+        actions.setAlertStatus({
           type: 'success',
           msg: resp.updateTask.msg
-        }))
+        })
       }
     } catch(e) {
-      dispatch(actions.setAlertOpen(true))
-      dispatch(actions.setAlertStatus({
+      actions.setAlertOpen(true)
+      actions.setAlertStatus({
         type: 'error',
         msg: 'Something wrong'
-      }))
+      })
+
       console.error(e)
     }
   }
@@ -207,3 +212,17 @@ export default function Task() {
     </>
   )
 }
+
+const mapStateToProps = (state: IState) => ({
+  currentUser: state.currentUser,
+  users: state.users,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  actions: bindActionCreators(Actions, dispatch)
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Task)

@@ -1,10 +1,12 @@
 import Router from 'next/router'
 import { useEffect } from 'react'
 
-export default function _error() {
+const _error = () => {
   useEffect(() => {
     Router.push('/login')
   })
 
   return <div />
 }
+
+export default  _error

@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useMemo, useState } from 'react'
 import { bindActionCreators, Dispatch } from 'redux'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { Grid, Fab, styled } from '@material-ui/core'
 import { Pagination } from '@material-ui/lab'
 import { Add } from '@material-ui/icons'
@@ -12,9 +12,11 @@ import {
   login, getAllTasks, getAllUsers, getAllSelectUser
 } from 'pages/api/graphql'
 
-import type { IState } from 'types'
+import type { IState, IUser } from 'types'
 
 type TProps = {
+  currentUser: IUser
+  currentPage: number
   actions: typeof Actions
 }
 
@@ -35,9 +37,7 @@ const BottomGrid = styled(Grid)(() => ({
   transform: 'translateX(-50%)'
 }))
 
-const Index = ({ actions }: TProps) => {
-  const { currentUser, currentPage } = useSelector<IState, IState>((state) => state)
-
+const Index = ({ currentUser, currentPage, actions }: TProps) => {
   const [total, setTotal] = useState(0)
   const [totalPage, setTotalPage] = useState(0)
   const fetchData = async () => {
@@ -105,10 +105,16 @@ const Index = ({ actions }: TProps) => {
   )
 }
 
-
+const mapStateToProps = (state: IState) => ({
+  currentUser: state.currentUser,
+  currentPage: state.currentPage,
+})
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   actions: bindActionCreators(Actions, dispatch)
 })
 
-export default connect(null, mapDispatchToProps)(Index)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Index)

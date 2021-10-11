@@ -13,7 +13,7 @@ const MainLayer = styled('div')(() => ({
   minHeight: 'calc(100vh - 4.5rem)'
 }))
 
-export default function Layout({ children }: TProps) {
+const Layout = ({ children }: TProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Heading />
@@ -26,3 +26,5 @@ export default function Layout({ children }: TProps) {
     </ThemeProvider>
   )
 }
+
+export default Layout

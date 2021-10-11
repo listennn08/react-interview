@@ -8,7 +8,7 @@ import type { IState } from 'types'
 
 const Alert = (props: AlertProps) => <MuiAlert elevation={6} variant="filled" {...props} />
 
-export default function BaseDialog() {
+const BaseAlert = () => {
   const { isAlertOpen, alertStatus } = useSelector<IState, IState>((state) => state)
   const dispatch = useDispatch()
 
@@ -29,3 +29,5 @@ export default function BaseDialog() {
     </Snackbar>
   )
 }
+
+export default BaseAlert

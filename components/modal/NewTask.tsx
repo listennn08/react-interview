@@ -25,7 +25,7 @@ const BFormGroup = styled(FormGroup)(() => ({
   marginBottom: '1rem'
 }))
 
-export default function NewTask() {
+const NewTask = () => {
   const { currentUser, currentPage, isModalOpen } = useSelector<IState, IState>((state) => state)
   const dispatch = useDispatch()
 
@@ -80,6 +80,7 @@ export default function NewTask() {
           type: 'success',
           msg: resp.createTask.msg
         }))
+
         handleClose()
       }
     } catch (e) {
@@ -156,3 +157,5 @@ export default function NewTask() {
     </BModal>
   )
 }
+
+export default NewTask
