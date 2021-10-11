@@ -26,7 +26,7 @@ const BFormGroup = styled(FormGroup)(() => ({
 }))
 
 const NewTask = () => {
-  const { currentUser, currentPage, isModalOpen } = useSelector<IState, IState>((state) => state)
+  const { currentUser, currentPage, total, isModalOpen } = useSelector<IState, IState>((state) => state)
   const dispatch = useDispatch()
 
   const [task, setTask] = useState<ICreateTask>({
@@ -74,13 +74,18 @@ const NewTask = () => {
       const resp = await createTask({ ...task })
       if (resp.createTask.status) {
         const taskResp = (await getAllTasks(currentUser.id, currentPage)).allTasks
-        dispatch(actions.setTasks(taskResp.data))
+        dispatch(actions.setTasks(taskResp.data.tasks))
+
         dispatch(actions.setAlertOpen(true))
         dispatch(actions.setAlertStatus({
           type: 'success',
           msg: resp.createTask.msg
         }))
 
+        if (taskResp.data.total === total) return
+
+        actions.setTotal(taskResp.data.total)
+        actions.setTotalPage(Math.ceil(taskResp.data.total / 10))
         handleClose()
       }
     } catch (e) {

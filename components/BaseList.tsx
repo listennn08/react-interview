@@ -52,8 +52,6 @@ const BaseList = () => {
   const [displayTasks, setDisplayTasks] = useState<ITask[]>([])
 
   useEffect(() => {
-    console.log(tasks)
-    console.log(displayTasks)
     if (filterStatus) {
       setDisplayTasks(tasks.filter((task) => task.status === filterStatus))
     } else {

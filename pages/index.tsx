@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useMemo, useState } from 'react'
+import { ChangeEvent, useEffect, useMemo } from 'react'
 import { bindActionCreators, Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { Grid, Fab, styled } from '@material-ui/core'
@@ -17,6 +17,8 @@ import type { IState, IUser } from 'types'
 type TProps = {
   currentUser: IUser
   currentPage: number
+  total: number
+  totalPage: number
   actions: typeof Actions
 }
 
@@ -37,9 +39,8 @@ const BottomGrid = styled(Grid)(() => ({
   transform: 'translateX(-50%)'
 }))
 
-const Index = ({ currentUser, currentPage, actions }: TProps) => {
-  const [total, setTotal] = useState(0)
-  const [totalPage, setTotalPage] = useState(0)
+const Index = ({ currentUser, currentPage, total, totalPage, actions }: TProps) => {
+  
   const fetchData = async () => {
     const allUsersResp = (await getAllUsers()).allUsers
     actions.setUsers(allUsersResp.data)
@@ -58,7 +59,7 @@ const Index = ({ currentUser, currentPage, actions }: TProps) => {
   const fetchingData = useMemo(() => fetchData, [])
 
   const handlePageClick = (_: ChangeEvent<any>, page: number) => {
-    actions.serCurrentPage(page)
+    actions.setCurrentPage(page)
   }
   useEffect(() => {
     fetchingData()
@@ -70,8 +71,8 @@ const Index = ({ currentUser, currentPage, actions }: TProps) => {
       actions.setTasks(taskResp.data.tasks)
       if (taskResp.data.total === total) return
 
-      setTotal(taskResp.data.total)
-      setTotalPage(Math.ceil(taskResp.data.total / 10))
+      actions.setTotal(taskResp.data.total)
+      actions.setTotalPage(Math.ceil(taskResp.data.total / 10))
     }
 
     if (currentUser.id) fetchTasks()
@@ -108,6 +109,8 @@ const Index = ({ currentUser, currentPage, actions }: TProps) => {
 const mapStateToProps = (state: IState) => ({
   currentUser: state.currentUser,
   currentPage: state.currentPage,
+  total: state.total,
+  totalPage: state.totalPage,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
