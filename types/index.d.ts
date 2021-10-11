@@ -69,6 +69,8 @@ export interface IState {
     msg: string
   }
   currentPage: number
+  total: number
+  totalPage: number
 }
 
 export type TContext = {

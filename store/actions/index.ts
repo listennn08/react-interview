@@ -13,5 +13,7 @@ export const setUsers = (users: IUser[]) => ({ type: types.SET_USERS, users })
 export const setSelectUser = (users: IUser[]) => ({ type: types.SET_SELECT_USER, users })
 export const setTasks = (tasks: ITask[]) => ({ type: types.SET_TASKS, tasks })
 export const setFilterStatus = (status: string) => ({ type: types.SET_FILETER_STATUS, status })
-export const serCurrentPage = (page: number) => ({ type: types.SET_CURRENT_PAGE, page})
+export const setCurrentPage = (page: number) => ({ type: types.SET_CURRENT_PAGE, page })
+export const setTotal = (total: number) => ({ type: types.SET_TOTAL, total })
+export const setTotalPage = (total: number) => ({ type: types.SET_TOTAL_PAGE, total })
 

@@ -11,6 +11,8 @@ import {
   SET_ALERT_OPEN,
   SET_ALERT_STATUS,
   SET_CURRENT_PAGE,
+  SET_TOTAL,
+  SET_TOTAL_PAGE,
 } from '../constants'
 
 import type { IState } from 'types'
@@ -35,6 +37,8 @@ const defaultState: IState = {
     msg: '',
   },
   currentPage: 1,
+  total: 0,
+  totalPage: 1,
 }
 
 const reducer = (state: IState = defaultState, action: AnyAction) => {
@@ -98,6 +102,16 @@ const reducer = (state: IState = defaultState, action: AnyAction) => {
       return {
         ...state,
         currentPage: action.page,
+      }
+    case SET_TOTAL:
+      return {
+        ...state,
+        total: action.total
+      }
+    case SET_TOTAL_PAGE:
+      return {
+        ...state,
+        totalPage: action.total
       }
     default:
       return state
