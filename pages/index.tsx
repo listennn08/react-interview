@@ -58,17 +58,19 @@ const Index = ({ currentUser, currentPage, total, totalPage, actions }: TProps) 
 
   const fetchingData = useMemo(() => fetchData, [])
 
-  const handlePageClick = (_: ChangeEvent<any>, page: number) => {
-    actions.setCurrentPage(page)
-  }
   useEffect(() => {
     fetchingData()
   }, [fetchingData])
+
+  const handlePageClick = (_: ChangeEvent<any>, page: number) => {
+    actions.setCurrentPage(page)
+  }
 
   useEffect(() => {
     const fetchTasks = async () => {
       const taskResp = (await getAllTasks(currentUser.id, currentPage)).allTasks
       actions.setTasks(taskResp.data.tasks)
+      actions.setCurrentPage(currentPage)
       if (taskResp.data.total === total) return
 
       actions.setTotal(taskResp.data.total)
@@ -84,8 +86,9 @@ const Index = ({ currentUser, currentPage, total, totalPage, actions }: TProps) 
     <BGrid container spacing={3}>
       <BaseList />
       <BottomGrid item xs={12}>
-        <Pagination 
+        <Pagination
           count={totalPage}
+          page={currentPage} 
           variant="outlined"
           shape="rounded"
           onChange={handlePageClick}
