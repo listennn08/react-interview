@@ -6,11 +6,17 @@
 
 ## usage
 ```
-Frontend: React.js,  Next.js
+Frontend: React.js,  Next.js, Redux
 UI Framework: MaterialUI
 Backend: Express, Apollo Server
-Lauguage: TypeScript
+Language: TypeScript
 ```
+
+## Authorization
+
+Manager: 查看底下員工的所有文件
+Staff: 建立文件，查看文件，編輯文件
+influencer: 查看與編輯有權限的文件
 ## schema
 
 ```gql
