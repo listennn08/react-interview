@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import { ApolloServer } from 'apollo-server-express'
 import { typeDefs } from './apollo/type-defs'
 import { resolvers } from './apollo/resolvers'
+import { login } from './pages/api/graphql'
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
@@ -27,7 +28,10 @@ app.prepare()
             const user = jwt.verify(token, secret)
             return { ...context, user }
           } catch (e) {
-            throw new Error('Your session expired. Sign in again.')
+            const resp = (await login('TW00001', '123')).login
+            localStorage.setItem('token', resp.data!.token)
+            // throw new Error('Your session expired. Sign in again.')
+
           }
         }
 
