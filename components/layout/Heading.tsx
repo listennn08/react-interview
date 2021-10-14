@@ -2,7 +2,7 @@ import React, { MouseEvent, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   AppBar, Toolbar, Typography, Button,
-  Menu, MenuItem, IconButton, styled, Theme
+  Menu, MenuItem, IconButton, styled,
 } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
