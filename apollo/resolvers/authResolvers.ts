@@ -6,7 +6,7 @@ import type {
   IUser, ICreateUser, IStatus, ILoginUser,
 } from 'types'
 
-const createToken = (id: string, secret: string): string => jwt.sign({ id }, secret, { expiresIn: '1d' });
+const createToken = (id: string, secret: string): string => jwt.sign({ id }, secret, { expiresIn: '1d' })
 
 const pad = (n: string, width: number, z: string = '0') => {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n
