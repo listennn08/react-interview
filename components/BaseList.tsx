@@ -9,9 +9,22 @@ import {
 
 import type { IState, ITask } from 'types'
 
-const BCardContent = styled(CardContent)(() => ({
+const BCardContent = styled(CardContent)(({ theme }) => ({
   display: 'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  [theme.breakpoints.down('md')]: {
+    alignItems: 'start',
+    flexDirection: 'column',
+  },
+}))
+
+const Title = styled('div')(({ theme }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  [theme.breakpoints.down('md')]: {
+    alignItems: 'start',
+    flexDirection: 'column',
+  },
 }))
 
 const BChip = styled(Chip)(() => ({
@@ -22,13 +35,19 @@ const BChip = styled(Chip)(() => ({
   },
 }))
 
-const BButton = styled(Button)(() => ({
-  marginLeft: '1.5rem'
+const BButton = styled(Button)(({ theme }) => ({
+  marginLeft: '1.5rem',
+  [theme.breakpoints.down('md')]: {
+    marginLeft: '0',
+  },
 }))
 
-const Creator = styled('span')(() => ({
+const Creator = styled('span')(({ theme }) => ({
   color: grey[600],
   marginLeft: 'auto',
+  [theme.breakpoints.down('md')]: {
+    marginLeft: '0',
+  },
 }))
 
 const chipColor = (status: string) => {
@@ -62,13 +81,19 @@ const BaseList = () => {
   return (
     <>
       {displayTasks.map((task) => (
-        <Grid item xs={4} key={task.id}>
+        <Grid item xs={12} sm={3} lg={4} key={task.id}>
           <Card>
             <BCardContent>
-              <BChip label={chipText[task?.status]} color={chipColor(task?.status)} size="small" />
-              <Typography variant="h5">
-                {task?.title}
-              </Typography>
+              <Title>
+                <BChip
+                  label={chipText[task?.status]}
+                  color={chipColor(task?.status)}
+                  size="small"
+                />
+                <Typography variant="h5">
+                  {task?.title}
+                </Typography>
+              </Title>
               <Creator>
                 建立者: {task?.createdBy.name}
               </Creator>

@@ -2,8 +2,9 @@ import React, { MouseEvent, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   AppBar, Toolbar, Typography, Button,
-  Menu, MenuItem, styled
+  Menu, MenuItem, IconButton, styled, Theme
 } from '@material-ui/core'
+import MenuIcon from '@material-ui/icons/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import * as actions from 'store/actions'
 import { login } from 'pages/api/graphql'
@@ -23,7 +24,7 @@ const Title = styled(Typography)(() => ({
 }))
 
 const Heading = () => {
-  const { currentUser, users } = useSelector<IState, IState>((state) => state)
+  const { currentUser, users, isOpen } = useSelector<IState, IState>((state) => state)
   const dispatch = useDispatch()
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement|null>(null)
@@ -42,9 +43,21 @@ const Heading = () => {
     setAnchorEl(null)
   }
 
+  const handleDrawerOpen = () => {
+    dispatch(actions.setIsOpen(!isOpen))
+  }
+
   return (
     <BAppBar position="fixed">
       <Toolbar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          edge="start"
+        >
+          <MenuIcon />
+        </IconButton>
         <Title variant="h6">文件管理</Title>
         <Button
           aria-label="account of current user"

@@ -13,8 +13,13 @@ const drawerWidth = 300
 
 const BDrawer = styled(Drawer)(({ theme }) => ({
   width: drawerWidth,
+  '&.open .MuiDrawer-paper': {
+    transform: 'translateX(0)'
+  },
   flexShrink: 0,
   '& .MuiDrawer-paper': {
+    transition: 'transform .25s ease-in',
+    transform: 'translateX(-300px)',
     marginTop: '4rem',
     maxHeight: 'calc(100% - 4rem)',
   },
